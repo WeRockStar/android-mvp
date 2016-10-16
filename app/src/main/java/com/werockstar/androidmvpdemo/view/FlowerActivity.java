@@ -7,11 +7,20 @@ import android.support.v7.widget.RecyclerView;
 
 import com.werockstar.androidmvpdemo.R;
 import com.werockstar.androidmvpdemo.adapter.FlowerAdapter;
+import com.werockstar.androidmvpdemo.api.FlowerApi;
+import com.werockstar.androidmvpdemo.util.Constant;
+
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FlowerActivity extends AppCompatActivity {
 
-    RecyclerView recyclerView;
-    FlowerAdapter adapter;
+    private RecyclerView recyclerView;
+    private FlowerAdapter adapter;
+
+    private Retrofit retrofit;
+    private FlowerApi api;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +28,16 @@ public class FlowerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_flower);
 
         adapter = new FlowerAdapter();
+        configurationRetrofit();
         configurationRecycler();
+    }
+
+    private void configurationRetrofit() {
+        retrofit = new Retrofit.Builder()
+                .baseUrl(Constant.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        api = retrofit.create(FlowerApi.class);
     }
 
     private void configurationRecycler() {
