@@ -60,7 +60,7 @@ public class FlowerActivity extends AppCompatActivity implements FlowerPresenter
 
     @Override
     public void onDisplayFlower(List<FlowersCollection> flowers) {
-        adapter.setFlowerList(flowers);
+        adapter.setFlowerList(flowers, this);
         adapter.notifyDataSetChanged();
     }
 
