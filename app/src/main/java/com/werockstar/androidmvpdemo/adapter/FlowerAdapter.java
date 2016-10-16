@@ -8,8 +8,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.werockstar.androidmvpdemo.R;
+import com.werockstar.androidmvpdemo.model.FlowersCollection;
+
+import java.util.List;
 
 public class FlowerAdapter extends RecyclerView.Adapter<FlowerAdapter.FlowerViewHolder> {
+
+    private List<FlowersCollection> flowerList;
+
+    public void setFlowerList(List<FlowersCollection> flowerList) {
+        this.flowerList = flowerList;
+    }
 
     @Override
     public FlowerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -19,12 +28,12 @@ public class FlowerAdapter extends RecyclerView.Adapter<FlowerAdapter.FlowerView
 
     @Override
     public void onBindViewHolder(FlowerViewHolder holder, int position) {
-
+        holder.tvInstruction.setText(flowerList.get(position).getInstructions());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return flowerList == null ? 0 : flowerList.size();
     }
 
 
